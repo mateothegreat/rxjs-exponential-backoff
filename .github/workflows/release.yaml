@@ -17,22 +17,42 @@ jobs:
       contents: write
       packages: write
     steps:
+      # [setup] authenticate with the cicd app to get proper credentials for pushing to the repo later.
       - name: cicd app auth
         id: app
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v2.1.1
         with:
           app-id: ${{ secrets.CICD_APP_ID }}
           private-key: ${{ secrets.CICD_APP_PRIVATE_KEY }}
-      - uses: actions/checkout@v4
+      # [setup] checkout the repo.
+      - uses: actions/checkout@v5.0.0
         with:
           fetch-depth: 0
           persist-credentials: false
+      # [setup] setup node.js.
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: 20.x
+      # [setup] configure git for later changelog generation, commit, and the finalpush.
+      - name: configure git
+        run: |
+          git config --global user.name "mateothegreat[bot]"
+          git config --global user.email "mateothegreat[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ steps.app.outputs.token }}@github.com/${{ github.repository }}.git
+      # [build] install dependencies first.
+      - name: install
+        run: npm install
+      # [build] build the package which outputs to the dist/ directory.
+      - name: build
+        run: npm run build
+      # [version] bump the version.
+      - name: npm version
+        id: version
+        run: npm version patch --json | sed 's/^v//'
+      # [version] generate the new changelog.
       - name: generate changelog
-        uses: orhun/git-cliff-action@v4.4.2
+        uses: orhun/git-cliff-action@v4.5.1
         id: git-cliff
         with:
           config: ./docs/cliff.toml
@@ -40,33 +60,21 @@ jobs:
         env:
           OUTPUT: tmp/changelog.md
           GITHUB_REPO: ${{ github.repository }}
-      - name: configure git
-        run: |
-          git config --global user.name "mateothegreat[bot]"
-          git config --global user.email "mateothegreat[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ steps.app.outputs.token }}@github.com/${{ github.repository }}.git
-      - name: npm version
-        run: npm version ${{ steps.tag.outputs.new_tag }} --force
-      - name: concat changelogs
-        run: |
-          cat ${{ steps.git-cliff.outputs.changelog }} > tmp/new_changelog.md
-          cat docs/changelog.md >> tmp/new_changelog.md
-          mv tmp/new_changelog.md docs/changelog.md
+      # [version] commit the changelog and package.json.
       - name: commit
         run: |
           git add docs/changelog.md package.json
           git commit -am "chore(release): update changelog and bumping package.json"
           git push origin HEAD:main
+      # [publish] prepare to publish by setting up credentials.
       - name: write to .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
-      - name: install
-        run: npm install
-      - name: build
-        run: npm run build
+      # [publish] release publicly only if the build was successful above.
       - name: publish
         run: npm publish
+      # [publish] create a github release.
       - name: create github release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v2.3.2
         with:
           body: ${{ steps.git-cliff.outputs.content }}
           tag_name: ${{ steps.tag.outputs.new_tag }}
@@ -76,7 +84,9 @@ jobs:
       - build
     runs-on: ubuntu-latest
     steps:
-      - uses: sarisia/actions-status-discord@v1
+      - uses: Ilshidur/action-discord@ad5235de713df3ef38022185499b02ffe93b7efe
         with:
           status: ${{ needs.build.result }}
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
