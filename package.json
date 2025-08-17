@@ -1,0 +1,65 @@
+{
+  "name": "@mateothegreat/lib",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    "./dist/*": {
+      "types": "./dist/*.ts",
+      "import": "./dist/*.ts"
+    },
+    "./*": {
+      "types": "./src/*.d.ts",
+      "import": "./src/*.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "docs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mateothegreat/lib",
+    "directory": "packages/lib"
+  },
+  "description": "typescript library",
+  "keywords": [
+    "typescript",
+    "library"
+  ],
+  "author": {
+    "name": "Matthew Davis",
+    "email": "matthew@matthewdavis.io"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "release": "npm version from-git && npm publish --access public",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "dev:sync": "npm run build && npm link",
+    "dev:sync:watch": "find . -name '*.ts' | entr -c npm run dev:sync"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.7",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^9.31.0",
+    "eslint-plugin-markdown": "^5.1.0",
+    "globals": "^16.3.0",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.39.1",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4"
+  }
+}
