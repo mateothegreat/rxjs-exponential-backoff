@@ -56,13 +56,14 @@ jobs:
             echo "npm version patch failed, git is dirty"
             exit 1
           }
+      - run: echo ${{ steps.version.outputs.new_tag }}
       # [version] generate the new changelog.
       - name: generate changelog
         uses: orhun/git-cliff-action@v4.5.1
         id: git-cliff
         with:
           config: ./docs/cliff.toml
-          args: --strip header --latest --tag ${{ steps.tag.outputs.new_tag }}
+          args: --strip header --latest --tag ${{ steps.version.outputs.new_tag }}
         env:
           OUTPUT: docs/changelog.md
           GITHUB_REPO: ${{ github.repository }}
