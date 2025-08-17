@@ -49,7 +49,7 @@ jobs:
       # [version] bump the version.asdf
       - name: npm version
         id: version
-        run: npm version patch --json | sed 's/^v//' | { echo "no dice" && exit 1; }
+        run: npm version patch --json | sed 's/^v//' || { echo "npm version patch failed" && exit 1 }
       # [version] generate the new changelog.
       - name: generate changelog
         uses: orhun/git-cliff-action@v4.5.1
