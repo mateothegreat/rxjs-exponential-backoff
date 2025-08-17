@@ -62,14 +62,15 @@ jobs:
           config: ./docs/cliff.toml
           args: --strip header --latest --tag ${{ steps.tag.outputs.new_tag }}
         env:
-          OUTPUT: tmp/changelog.md
+          OUTPUT: docs/changelog.md
           GITHUB_REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # [version] commit the changelog and package.json.
       - name: commit
         run: |
           git add docs/changelog.md package.json
           git commit -am "chore(release): update changelog and bumping package.json"
-          git push origin HEAD:main
+          git push origin HEAD:main --follow-tags
       # [publish] prepare to publish by setting up credentials.
       - name: write to .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
