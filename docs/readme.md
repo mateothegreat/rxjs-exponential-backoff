@@ -1,6 +1,6 @@
-# @mateothegreat/typescript-library-template
+# @mateothegreat/rxjs-exponential-backoff
 
-🐣 TypeScript library template ready to hack, compile, and distribute!
+🐣 RxJS Exponential Backoff ready to hack, compile, and distribute!
 
 ## License
 

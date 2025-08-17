@@ -1,10 +1,8 @@
 // import * as espree from "espree";
 import tseslintParser from "@typescript-eslint/parser";
-import tseslint from "typescript-eslint";
-// TODO: I wasn't able to get the parser for extra files working, but maybe we don't need it?
-// import * as tseslintExtraParser from 'typescript-eslint-parser-for-extra-files';
 import markdown from "eslint-plugin-markdown";
 import globals from "globals";
+import tseslint from "typescript-eslint";
 
 const ignores = [
   "node_modules/**/*",
@@ -23,7 +21,7 @@ export default tseslint.config(
     languageOptions: {
       parserOptions: {
         projectService: {
-          allowDefaultProject: ["eslint.config.js"]
+          allowDefaultProject: ["eslint.config.js", "vitest.config.ts"]
         },
         tsconfigRootDir: import.meta.dirname
       }

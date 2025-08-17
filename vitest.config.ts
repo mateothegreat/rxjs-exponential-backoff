@@ -5,12 +5,11 @@ export default defineConfig({
   plugins: [
     tsconfigPaths({
       projects: ["./tsconfig.json"]
-    }),
+    })
   ],
   test: {
     globals: true,
-    environment: "jsdom",
-    setupFiles: ["@vitest/web-worker"],
+    environment: "node",
     coverage: {
       provider: "v8",
       reporter: ["json"],
@@ -38,4 +37,3 @@ export default defineConfig({
     }
   }
 });
-  

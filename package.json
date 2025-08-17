@@ -1,5 +1,5 @@
 {
-  "name": "@mateothegreat/lib",
+  "name": "@mateothegreat/rxjs-exponential-backoff",
   "version": "0.0.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -23,20 +23,22 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mateothegreat/lib",
+    "url": "https://github.com/mateothegreat/rxjs-exponential-backoff",
     "directory": "packages/lib"
   },
   "description": "typescript library",
   "keywords": [
-    "typescript",
-    "library"
+    "rxjs",
+    "backoff",
+    "exponential",
+    "exponential backoff"
   ],
   "author": {
     "name": "Matthew Davis",
     "email": "matthew@matthewdavis.io"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "prepublishOnly": "npm run build",
     "release": "npm version from-git && npm publish --access public",
     "test": "vitest run",
@@ -45,6 +47,7 @@
     "dev:sync:watch": "find . -name '*.ts' | entr -c npm run dev:sync"
   },
   "peerDependencies": {
+    "rxjs": "^7.0.0",
     "typescript": "^5.0.0"
   },
   "devDependencies": {
@@ -56,6 +59,7 @@
     "eslint-plugin-markdown": "^5.1.0",
     "globals": "^16.3.0",
     "prettier": "^3.6.2",
+    "rxjs": "^7.8.2",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.39.1",
