@@ -2,6 +2,8 @@ name: 🚀 Release
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
     tags:
       - "*"
     paths-ignore:
@@ -65,6 +67,12 @@ jobs:
           OUTPUT: docs/changelog.md
           GITHUB_REPO: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: check git-cliff exit code
+        run: |
+          if [ ${{ steps.git-cliff.outputs.exit_code }} -gt 0 ]; then
+            echo "git-cliff failed, exiting"
+            exit 1
+          fi
       # [version] commit the changelog and package.json.
       - name: commit
         run: |
