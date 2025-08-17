@@ -52,18 +52,19 @@ jobs:
       - name: npm version
         id: version
         run: |
-          npm version patch --json | sed 's/^v//' || {
+          version=$(npm version patch --json | sed 's/^v//' || {
             echo "npm version patch failed, git is dirty"
             exit 1
-          }
-      - run: echo ${{ steps.version.outputs.new_tag }}
+          })
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - run: echo ${{ steps.version.outputs.version }}
       # [version] generate the new changelog.
       - name: generate changelog
-        uses: orhun/git-cliff-action@v4.5.1
+        uses: orhun/git-cliff-action@98c93442bb05a455a77bee982867857ae748eeea
         id: git-cliff
         with:
           config: ./docs/cliff.toml
-          args: --strip header --latest --tag ${{ steps.version.outputs.new_tag }}
+          args: --strip header --latest --tag ${{ steps.version.outputs.version }}
         env:
           OUTPUT: docs/changelog.md
           GITHUB_REPO: ${{ github.repository }}
@@ -91,7 +92,7 @@ jobs:
         uses: softprops/action-gh-release@v2.3.2
         with:
           body: ${{ steps.git-cliff.outputs.content }}
-          tag_name: ${{ steps.tag.outputs.new_tag }}
+          tag_name: ${{ steps.tag.outputs.version }}
   notify:
     if: always()
     needs:
