@@ -4,7 +4,6 @@
 trim = true
 render_always = true
 header = """
-
 {%- macro remote_url() -%}
   https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
 {%- endmacro -%}
@@ -22,14 +21,13 @@ header = """
   <h1><strong>@mateothegreat/{{ remote.github.repo }}</strong></h1>
   <h3>📋 tl;dr changelog</h3>
   <p>
-    <a href="{{ self::remote_url() }}">gitHub</a> •
+    <a href="{{ self::remote_url() }}">github</a> •
     <a href="{{ self::npm_url() }}">npm</a> •
     <a href="{{ self::documentation_url() }}">docs</a>
   </p>
 </div>
----
-<div><em>last 20 commits</em></div>
 
+<div><em>Here are the last 20~ commits ✌️</em></div>
 """
 
 body = """
