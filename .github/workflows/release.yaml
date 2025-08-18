@@ -58,7 +58,6 @@ jobs:
           })
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "version is now: $version"
-          git commit -am "chore(release): update of package.json to $version"
       # [version] generate the new changelog.
       - name: generate changelog
         uses: orhun/git-cliff-action@98c93442bb05a455a77bee982867857ae748eeea
