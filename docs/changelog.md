@@ -3,14 +3,31 @@
 <h1><strong>@mateothegreat/rxjs-exponential-backoff</strong></h1>
 <h3>📋 tl;dr changelog</h3>
 <p>
-<a href="https://github.com/mateothegreat/rxjs-exponential-backoff">gitHub</a> •
+<a href="https://github.com/mateothegreat/rxjs-exponential-backoff">github</a> •
 <a href="https://www.npmjs.com/package/mateothegreat/rxjs-exponential-backoff">npm</a> •
 <a href="https://rxjs-exponential-backoff.docs.matthewdavis.io">docs</a>
 </p>
 </div>
----
-<div><em>last 20 commits</em></div>
 
+<div><em>Here are the last 20~ commits ✌️</em></div>
+## [0.0.12](https://github.com/mateothegreat/rxjs-exponential-backoff/releases/tag/0.0.12) - 2025-08-18
+
+### 📊 Release Summary
+- **Version**: `0.0.12`
+- **Released**: August 18, 2025
+- **Total Changes**: 2 commits
+
+### 📋 Other Changes
+
+-   First commit  by [@Matthew Davis](https://github.com/Matthew Davis)  ([`6dfb122`](https://github.com/mateothegreat/rxjs-exponential-backoff/commit/6dfb122986e29d9531078d54774c1e6b6a55c377))
+
+-   Merge branch 'main' of github.com:mateothegreat/rxjs-exponential-backoff  by [@Matthew Davis](https://github.com/Matthew Davis)  ([`25e19f5`](https://github.com/mateothegreat/rxjs-exponential-backoff/commit/25e19f5c3575c3871a2d10c1b0fccef341b09217))
+
+### 👥 Contributors
+
+Thanks ❤️‍🔥 to the following people who contributed to this release:
+
+- [@mateothegreat](https://github.com/mateothegreat)
 ## [0.0.11](https://github.com/mateothegreat/rxjs-exponential-backoff/releases/tag/0.0.11) - 2025-08-18
 
 ### 📊 Release Summary
@@ -100,23 +117,6 @@ Thanks ❤️‍🔥 to the following people who contributed to this release:
 -   First commit  by [@Matthew Davis](https://github.com/Matthew Davis)  ([`4ff0ac0`](https://github.com/mateothegreat/rxjs-exponential-backoff/commit/4ff0ac043e6f4beb120952563859126b7a7b097d))
 
 -   Merge branch 'main' of github.com:mateothegreat/rxjs-exponential-backoff  by [@Matthew Davis](https://github.com/Matthew Davis)  ([`5267647`](https://github.com/mateothegreat/rxjs-exponential-backoff/commit/5267647b5cfbd57fb110edf7f15bfea581722cd5))
-
-### 👥 Contributors
-
-Thanks ❤️‍🔥 to the following people who contributed to this release:
-
-- [@mateothegreat](https://github.com/mateothegreat)
-
-## [0.0.4](https://github.com/mateothegreat/rxjs-exponential-backoff/releases/tag/0.0.4) - 2025-08-18
-
-### 📊 Release Summary
-- **Version**: `0.0.4`
-- **Released**: August 18, 2025
-- **Total Changes**: 1 commit
-
-### 📋 Other Changes
-
--   First commit  by [@Matthew Davis](https://github.com/Matthew Davis)  ([`5d62bbd`](https://github.com/mateothegreat/rxjs-exponential-backoff/commit/5d62bbd4386693e2737367033ee484ff0c475dae))
 
 ### 👥 Contributors
 
