@@ -58,6 +58,9 @@ jobs:
           })
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "version is now: $version"
+          git add package.json
+          git commit -m "chore(release): update of package.json to $version"
+          git push origin HEAD:main
       # [version] generate the new changelog.
       - name: generate changelog
         uses: orhun/git-cliff-action@98c93442bb05a455a77bee982867857ae748eeea
@@ -70,8 +73,8 @@ jobs:
       # [version] commit the changelog and package.json.
       - name: commit
         run: |
-          git add docs/changelog.md package.json
-          git commit -am "chore(release): update changelog and bumping package.json"
+          git add docs/changelog.md
+          git commit -m "chore(release): update of changelog to ${{ steps.version.outputs.version }}"
           git push origin HEAD:main
           git tag -a ${{ steps.version.outputs.version }} -m "release: ${{ steps.version.outputs.version }}"
           git push origin ${{ steps.version.outputs.version }}
