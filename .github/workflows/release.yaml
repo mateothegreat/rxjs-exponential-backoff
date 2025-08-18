@@ -72,8 +72,9 @@ jobs:
         run: |
           git add docs/changelog.md package.json
           git commit -am "chore(release): update changelog and bumping package.json"
-          git tag -l
-          git push origin HEAD:main --follow-tags
+          git push origin HEAD:main
+          git tag -a ${{ steps.version.outputs.version }} -m "release: ${{ steps.version.outputs.version }}"
+          git push origin ${{ steps.version.outputs.version }}
       # [publish] prepare to publish by setting up credentials.
       - name: write to .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
