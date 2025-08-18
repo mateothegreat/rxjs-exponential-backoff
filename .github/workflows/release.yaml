@@ -62,7 +62,7 @@ jobs:
         id: git-cliff
         with:
           config: ./docs/cliff.toml
-          args: --strip header --latest --tag ${{ steps.version.outputs.version }}
+          args: --strip header --tag ${{ steps.version.outputs.version }}
         env:
           OUTPUT: docs/changelog.md
       # [version] commit the changelog and package.json.
