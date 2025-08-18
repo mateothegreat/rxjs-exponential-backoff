@@ -1,6 +1,8 @@
 # https://git-cliff.org/docs/integration/github/
 
 [changelog]
+trim = true
+render_always = true
 header = """
 
 {%- macro remote_url() -%}
@@ -25,6 +27,8 @@ header = """
     <a href="{{ self::documentation_url() }}">docs</a>
   </p>
 </div>
+---
+<div><em>last 20 commits</em></div>
 
 """
 
@@ -92,10 +96,6 @@ footer = """
 </div>
 """
 
-# Clean up the output
-trim = true
-render_always = true
-
 # Replace placeholders with actual URLs
 postprocessors = [
     { pattern = '<REPO>', replace = "https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}" },
@@ -108,8 +108,13 @@ postprocessors = [
 conventional_commits = true
 filter_unconventional = false
 require_conventional = false
+use_branch_tags = false
 split_commits = false
-limit_commits = 100
+limit_commits = 20
+sort_commits = "newest"
+topo_order = false
+topo_order_commits = true
+recurse_submodules = true
 
 # Preprocess commits to add GitHub links
 commit_preprocessors = [
@@ -194,9 +199,6 @@ commit_parsers = [
     { message = ".*", group = "<!-- 15 -->📋 Other Changes" },
 ]
 
-# Include all commits
-filter_commits = false
-
 # Enhanced link parsers
 link_parsers = [
     # Parse GitHub usernames
@@ -204,10 +206,3 @@ link_parsers = [
     # Parse commit SHAs
     { pattern = "([a-f0-9]{7})[a-f0-9]{33}", href = "https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/${0}" },
 ]
-
-# Additional git configuration
-use_branch_tags = false
-topo_order = false
-topo_order_commits = true
-sort_commits = "newest"
-recurse_submodules = true
