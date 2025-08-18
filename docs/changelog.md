@@ -1,13 +1,19 @@
-## [0.0.2](https://github.com/mateothegreat/ts-kit/releases/tag/v0.0.2) - 2025-08-17
+## [0.0.3](https://github.com/mateothegreat/ts-kit/releases/tag/0.0.3) - 2025-08-18
 
 ### 📊 Release Summary
-- **Version**: `0.0.2`
-- **Released**: August 17, 2025
-- **Total Changes**: 23 commits
+- **Version**: `0.0.3`
+- **Released**: August 18, 2025
+- **Total Changes**: 26 commits
 
 ### 📋 Other Changes
 
+- First commit by [@Matthew Davis](https://github.com/Matthew Davis) ([`c07ad08`](https://github.com/mateothegreat/ts-kit/commit/c07ad086b084b2c5971f382e535d6885d1b0d027))
+
+- Merge branch 'main' of github.com:mateothegreat/rxjs-exponential-backoff by [@Matthew Davis](https://github.com/Matthew Davis) ([`81ecec6`](https://github.com/mateothegreat/ts-kit/commit/81ecec6ec023c9ac175f6a86a52813b315fcbf63))
+
 - 0.0.2 by [@mateothegreat[bot]](https://github.com/mateothegreat[bot]) ([`bf298f6`](https://github.com/mateothegreat/ts-kit/commit/bf298f6439b35d7343d4748f2ff7ba6fc6ac853b))
+
+- First commit by [@Matthew Davis](https://github.com/Matthew Davis) ([`92c8754`](https://github.com/mateothegreat/ts-kit/commit/92c8754a7a9f6c0c9db4629c848362c653072f5c))
 
 - First commit by [@Matthew Davis](https://github.com/Matthew Davis) ([`4497c22`](https://github.com/mateothegreat/ts-kit/commit/4497c22580de268cacd7f53bd4bf3d3b03cb5d1f))
 
