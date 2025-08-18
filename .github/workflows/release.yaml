@@ -57,7 +57,7 @@ jobs:
             exit 1
           })
           echo "version=$version" >> "$GITHUB_OUTPUT"
-      - run: echo ${{ steps.version.outputs.version }}
+          echo "version is now: $version"
       # [version] generate the new changelog.
       - name: generate changelog
         uses: orhun/git-cliff-action@98c93442bb05a455a77bee982867857ae748eeea
@@ -67,20 +67,13 @@ jobs:
           args: --strip header --latest --tag ${{ steps.version.outputs.version }}
         env:
           OUTPUT: docs/changelog.md
-          GITHUB_REPO: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: check git-cliff exit code
-        run: |
-          if [ ${{ steps.git-cliff.outputs.exit_code }} -gt 0 ]; then
-            echo "git-cliff failed, exiting"
-            exit 1
-          fi
       # [version] commit the changelog and package.json.
       - name: commit
         run: |
           git add docs/changelog.md package.json
           git commit -am "chore(release): update changelog and bumping package.json"
-          git push origin HEAD:main --follow-tags
+          git tag -l
+          exit 1
       # [publish] prepare to publish by setting up credentials.
       - name: write to .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
@@ -92,7 +85,7 @@ jobs:
         uses: softprops/action-gh-release@v2.3.2
         with:
           body: ${{ steps.git-cliff.outputs.content }}
-          tag_name: ${{ steps.tag.outputs.version }}
+          tag_name: ${{ steps.version.outputs.version }}
   notify:
     if: always()
     needs:
