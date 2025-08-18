@@ -83,7 +83,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
       # [publish] release publicly only if the build was successful above.
       - name: publish
-        run: npm publish
+        run: npm publish --access public
       # [publish] create a github release.
       - name: create github release
         uses: softprops/action-gh-release@v2.3.2
