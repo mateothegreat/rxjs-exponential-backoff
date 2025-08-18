@@ -52,7 +52,7 @@ jobs:
       - name: npm version
         id: version
         run: |
-          version=$(npm version patch --json | sed 's/^v//' || {
+          version=$(npm version patch --no-git-tag-version --json | sed 's/^v//' || {
             echo "npm version patch failed, git is dirty"
             exit 1
           })
@@ -73,7 +73,7 @@ jobs:
           git add docs/changelog.md package.json
           git commit -am "chore(release): update changelog and bumping package.json"
           git tag -l
-          exit 1
+          git push origin HEAD:main --follow-tags
       # [publish] prepare to publish by setting up credentials.
       - name: write to .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
